@@ -1,0 +1,34 @@
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">Детский сад</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/children'} ? 'active' : '']]" href="/children">Список детей</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/employee'} ? 'active' : '']]" href="/employee">Сотрудники</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/children/yasli'} ? 'active' : '']]" href="/children/yasli">Ясли</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/children/mladwyje'} ? 'active' : '']]" href="/children/mladwyje">Младшая группа</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/children/srednije'} ? 'active' : '']]" href="/children/srednije">Средняя группа</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link [[${#request.requestURI == '/children/starwije'} ? 'active' : '']]" href="/children/starwije">Старшая группа</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>

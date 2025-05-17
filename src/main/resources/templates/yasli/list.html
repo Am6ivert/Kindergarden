@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Ясельная группа</title>
+</head>
+<body>
+<main layout:fragment="content" class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Список детей ясельной группы (Y1, Y2, Y3, Y4)</h1>
+        <a href="/children/new" class="btn btn-success">Добавить ребенка</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Телефон папы</th>
+                <th scope="col">Телефон мамы</th>
+                <th scope="col">Группа</th>
+                <th scope="col">Кружок</th>
+                <th scope="col">Национальность</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="child : ${children}">
+                <td th:text="${child.id}">1</td>
+                <td th:text="${child.fio}">Иванова Маша</td>
+                <td th:text="${#temporals.format(child.dateborn, 'dd.MM.yyyy')}">10.10.2021</td>
+                <td th:text="${child.adres}">ул. Лесная, 7</td>
+                <td th:text="${child.telPap}">+7 900 777-88-99</td>
+                <td th:text="${child.telMam}">+7 900 666-55-44</td>
+                <td th:text="${child.gruppa.gruppa}">Y1</td>
+                <td th:text="${child.kruzhok.kruzhok}">Рисование</td>
+                <td th:text="${child.nationality.nationality}">Русская</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+</body>
+</html>

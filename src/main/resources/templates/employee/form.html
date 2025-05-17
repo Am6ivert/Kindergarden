@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма сотрудника</title>
+</head>
+<body>
+<main layout:fragment="content" class="container mt-5">
+    <div class="mb-4">
+        <h1 th:text="${employees.id == 0} ? 'Добавить нового сотрудника' : 'Редактировать сотрудника'"></h1>
+    </div>
+
+    <form th:action="@{/employee}" th:object="${employees}" method="post" class="row g-3">
+        <input type="hidden" name="id" th:value="*{id}"/>
+
+        <div class="col-md-6">
+            <label for="fio" class="form-label">ФИО:</label>
+            <input type="text" id="fio" name="fio" th:field="*{fio}" class="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label for="dateborn" class="form-label">Дата рождения:</label>
+            <input type="date" id="dateborn" th:field="*{dateborn}" class="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label for="position" class="form-label">Должность:</label>
+            <select id="position" class="form-select" th:field="*{position}">
+                <option value="" disabled selected>Выберите должность</option>
+                <option th:each="position : ${positions}" th:value="${position.id}" th:text="${position.position}"></option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="adres" class="form-label">Адрес:</label>
+            <input type="text" id="adres" name="adres" th:field="*{adres}" class="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label for="telNum" class="form-label">Телефон:</label>
+            <input type="text" id="telNum" name="telNum" th:field="*{telNum}" class="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label for="kruzhok" class="form-label">Кружок:</label>
+            <select id="kruzhok" class="form-select" th:field="*{kruzhok}">
+                <option value="" disabled selected>Выберите кружок</option>
+                <option th:each="kruzhok : ${kruzhki}" th:value="${kruzhok.id}" th:text="${kruzhok.kruzhok}"></option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="gruppa" class="form-label">Группа:</label>
+            <select id="gruppa" class="form-select" th:field="*{gruppa}">
+                <option value="" disabled selected>Выберите группу</option>
+                <option th:each="group : ${gruppas}" th:value="${group.id}" th:text="${group.gruppa}"></option>
+            </select>
+        </div>
+
+        <div class="col-12 d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <a href="/employee" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let dateInput = document.querySelector('input[name="dateborn"]');
+        if (dateInput && !dateInput.value) {
+            dateInput.value = /*[[${#temporals.format(employees.dateborn, 'yyyy-MM-dd')}]]*/ '';
+        }
+        /*]]>*/
+    </script>
+</main>
+</body>
+</html>

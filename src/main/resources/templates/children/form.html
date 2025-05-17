@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма ребенка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<main layout:fragment="content" class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4" th:text="${children.id == 0} ? 'Добавить нового ребенка' : 'Редактировать ребенка'"></h2>
+
+            <form th:action="@{/children}" th:object="${children}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-3">
+                    <label class="form-label" for="fio">ФИО</label>
+                    <input type="text" id="fio" th:field="*{fio}" class="form-control" placeholder="Введите полное имя"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="dateborn">Дата рождения</label>
+                    <input type="date" id="dateborn" th:field="*{dateborn}" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="adres">Адрес</label>
+                    <input type="text" id="adres" th:field="*{adres}" class="form-control" placeholder="Введите адрес"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="telPap">Телефон отца</label>
+                        <input type="text" id="telPap" th:field="*{telPap}" class="form-control" placeholder="Телефон папы"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="telMam">Телефон мамы</label>
+                        <input type="text" id="telMam" th:field="*{telMam}" class="form-control" placeholder="Телефон мамы"/>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="gruppa">Группа</label>
+                    <select id="gruppa" class="form-select" th:field="*{gruppa}">
+                        <option value="" disabled selected>Выберите группу</option>
+                        <option th:each="group : ${gruppas}" th:value="${group.id}" th:text="${group.gruppa}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="kruzhok">Кружок</label>
+                    <select id="kruzhok" class="form-select" th:field="*{kruzhok}">
+                        <option value="" disabled selected>Выберите кружок</option>
+                        <option th:each="kruzhok : ${kruzhki}" th:value="${kruzhok.id}" th:text="${kruzhok.kruzhok}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="nationality">Национальность</label>
+                    <select id="nationality" class="form-select" th:field="*{nationality}">
+                        <option value="" disabled selected>Выберите национальность</option>
+                        <option th:each="nationality: ${nationalities}" th:value="${nationality.id}" th:text="${nationality.nationality}"></option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success px-4">Сохранить</button>
+                    <a href="/children" class="btn btn-secondary px-4">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

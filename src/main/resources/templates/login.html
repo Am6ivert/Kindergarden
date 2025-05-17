@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <style>
+    body {
+      background: #f8f9fa;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-card h2 {
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+<section layout:fragment="content">
+  <div class="login-card">
+    <h2 class="text-center">Вход в аккаунт</h2>
+
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+      Неверный логин или пароль
+    </div>
+
+    <form th:action="@{/login}" method="post" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label">Логин</label>
+        <input type="text" class="form-control" id="username" name="username" required autocomplete="username" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password" />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Войти</button>
+      </div>
+    </form>
+  </div>
+</section>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
